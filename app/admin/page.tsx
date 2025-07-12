@@ -2,6 +2,7 @@
 
 import React, { useState, ChangeEvent } from "react";
 import Link from "next/link";
+import { FaTachometerAlt, FaBook, FaCog, FaVoteYea, FaSignOutAlt, FaCalendarAlt, FaChartBar, FaUserCheck, FaInfoCircle, FaCheckCircle, FaBookOpen, FaIdBadge, FaUsers, FaCheckSquare, FaClipboardCheck, FaPaperPlane, FaRegSmile, FaLifeRing } from "react-icons/fa";
 
 interface Candidate {
   name: string;
@@ -58,13 +59,13 @@ const Sidebar = ({ active, setActive }: { active: string; setActive: (s: string)
   };
 
   return (
-    <aside className="w-72 bg-white shadow-lg flex flex-col py-8 px-6 min-h-screen">
+    <aside className="w-72 bg-white/60 backdrop-blur-lg shadow-2xl flex flex-col py-8 px-6 min-h-screen rounded-r-3xl border-r border-[#edeaff]/60" style={{boxShadow: '0 8px 32px 0 rgba(99, 102, 241, 0.25)'}}>
       <div className="flex flex-col items-center mb-10">
-        <div className="w-20 h-20 rounded-full bg-[#edeaff] flex items-center justify-center mb-2 overflow-hidden border-4 border-[#6C63FF]">
+        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#6C63FF] to-[#3B3397] flex items-center justify-center mb-2 overflow-hidden border-4 border-[#6C63FF] shadow-lg">
           {profileImg ? (
             <img src={profileImg} alt="Profile" className="w-full h-full object-cover" />
           ) : (
-            <svg width="48" height="48" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <svg width="56" height="56" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
               <circle cx="32" cy="24" r="16" fill="#6C63FF" fillOpacity="0.3" />
               <rect x="16" y="40" width="32" height="16" rx="8" fill="#6C63FF" fillOpacity="0.2" />
             </svg>
@@ -78,70 +79,71 @@ const Sidebar = ({ active, setActive }: { active: string; setActive: (s: string)
         <div className="text-xs text-gray-500 mb-2">President Student Council</div>
       </div>
       <nav className="flex flex-col gap-2 text-[#23235B] font-semibold">
-        <button onClick={() => setActive("dashboard")} className={`flex items-center gap-2 px-4 py-2 rounded-lg ${active === "dashboard" ? "bg-[#3B3397] text-white" : "hover:bg-[#edeaff]"}`}>Dashboard</button>
-        <button onClick={() => setActive("guideline")} className={`flex items-center gap-2 px-4 py-2 rounded-lg ${active === "guideline" ? "bg-[#3B3397] text-white" : "hover:bg-[#edeaff]"}`}>Voters Guideline</button>
-        <button onClick={() => setActive("settings")} className={`flex items-center gap-2 px-4 py-2 rounded-lg ${active === "settings" ? "bg-[#3B3397] text-white" : "hover:bg-[#edeaff]"}`}>Settings</button>
-        <button onClick={() => setActive("voting")} className={`flex items-center gap-2 px-4 py-2 rounded-lg ${active === "voting" ? "bg-[#3B3397] text-white" : "hover:bg-[#edeaff]"}`}>Voting</button>
-        <Link href="/" className="mt-auto text-[#3B3397] hover:underline px-4 py-2">Log out</Link>
+        <button onClick={() => setActive("dashboard")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "dashboard" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaTachometerAlt /> Dashboard</button>
+        <button onClick={() => setActive("guideline")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "guideline" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaBook /> Voters Guideline</button>
+        <button onClick={() => setActive("settings")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "settings" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaCog /> Settings</button>
+        <button onClick={() => setActive("voting")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "voting" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaVoteYea /> Voting</button>
+        <Link href="/" className="mt-auto flex items-center gap-3 text-[#3B3397] hover:underline px-4 py-2"><FaSignOutAlt /> Log out</Link>
       </nav>
     </aside>
   );
 };
 
 const Dashboard = () => (
-  <div className="w-full">
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+  <div className="w-full min-h-screen bg-gradient-to-br from-[#edeaff] via-[#f5f6fa] to-[#c7d2fe] rounded-3xl p-6 md:p-10 shadow-xl relative overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-0" style={{background: 'radial-gradient(ellipse at 60% 20%, #6C63FF22 0%, #edeaff00 70%)'}}></div>
+    <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
       <div>
-        <div className="text-lg font-semibold text-gray-600 mb-1">Hello, Juan!</div>
-        <div className="text-xl font-bold text-[#23235B] mb-2">Ongoing Elections</div>
-        <div className="bg-[#edeaff] rounded-lg p-4 flex items-center gap-4 w-[340px]">
-          <span className="font-semibold text-[#3B3397]">President Student Council</span>
-          <button className="ml-4 px-4 py-1 rounded-full bg-[#3B3397] text-white text-sm font-semibold">Vote Now</button>
+        <div className="text-lg font-semibold text-gray-600 mb-1 flex items-center gap-2"><FaUserCheck className = "text-[#6C63FF]" /> Hello, <span className="text-[#3B3397]">Juan!</span></div>
+        <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#3B3397] mb-2 drop-shadow">Ongoing Elections</div>
+        <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-4 flex items-center gap-4 w-[340px] shadow-lg">
+          <span className="font-semibold text-[#3B3397] flex items-center gap-2"><FaVoteYea /> President Student Council</span>
+          <button className="ml-4 px-4 py-1 rounded-full bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white text-sm font-semibold shadow hover:from-[#3B3397] hover:to-[#6C63FF] transition-all">Vote Now</button>
         </div>
       </div>
       {/* Calendar */}
-      <div className="bg-white rounded-lg shadow p-4 w-72 flex flex-col items-center">
-        <div className="font-semibold text-[#3B3397] mb-2">Calendar</div>
+      <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg p-4 w-72 flex flex-col items-center">
+        <div className="font-semibold text-[#3B3397] mb-2 flex items-center gap-2"><FaCalendarAlt /> Calendar</div>
         <div className="text-gray-400 text-sm">[Calendar Widget]</div>
       </div>
     </div>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       {/* Live Results */}
-      <div className="bg-white rounded-lg shadow p-6 col-span-2">
-        <div className="font-semibold text-[#3B3397] mb-2">Live Results</div>
+      <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg p-6 col-span-2">
+        <div className="font-semibold text-[#3B3397] mb-2 flex items-center gap-2"><FaChartBar /> Live Results</div>
         <div className="mb-4 text-gray-600 text-sm">President Student Council</div>
         {/* Bar Chart */}
         <div className="h-32 flex items-end gap-8 justify-center">
           <div className="flex flex-col items-center">
-            <div className="w-8 h-20 bg-[#6C63FF] rounded-t"></div>
+            <div className="w-8 h-20 bg-gradient-to-t from-[#6C63FF] to-[#edeaff] rounded-t shadow-md"></div>
             <span className="text-xs mt-1">Juan</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="w-8 h-12 bg-[#edeaff] rounded-t"></div>
+            <div className="w-8 h-12 bg-gradient-to-t from-[#edeaff] to-[#6C63FF] rounded-t shadow-md"></div>
             <span className="text-xs mt-1">Emma</span>
           </div>
           <div className="flex flex-col items-center">
-            <div className="w-8 h-28 bg-[#3B3397] rounded-t"></div>
+            <div className="w-8 h-28 bg-gradient-to-t from-[#3B3397] to-[#6C63FF] rounded-t shadow-md"></div>
             <span className="text-xs mt-1">Felix</span>
           </div>
         </div>
       </div>
       {/* Voting Process */}
-      <div className="bg-white rounded-lg shadow p-6 flex flex-col items-center justify-center">
-        <div className="font-semibold text-[#3B3397] mb-2">Voting Process</div>
-        <div className="w-24 h-24 rounded-full border-8 border-[#edeaff] flex items-center justify-center mb-2">
-          <span className="text-2xl font-bold text-[#3B3397]">70%</span>
+      <div className="bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center">
+        <div className="font-semibold text-[#3B3397] mb-2 flex items-center gap-2"><FaVoteYea /> Voting Process</div>
+        <div className="w-24 h-24 rounded-full border-8 border-[#edeaff] flex items-center justify-center mb-2 bg-gradient-to-br from-[#6C63FF22] to-[#edeaff99] shadow-inner">
+          <span className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#3B3397] drop-shadow">70%</span>
         </div>
         <div className="text-gray-600 text-sm text-center">Total number of registered candidates</div>
       </div>
     </div>
     {/* Election Activities */}
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="font-semibold text-[#3B3397] mb-2">Election Activities</div>
+    <div className="relative z-10 bg-white/70 backdrop-blur-lg rounded-2xl shadow-lg p-6">
+      <div className="font-semibold text-[#3B3397] mb-2 flex items-center gap-2"><FaBook /> Election Activities</div>
       <ul className="divide-y divide-gray-200">
         <li className="py-2 flex items-center justify-between">
           <span>President Student Council</span>
-          <span className="text-xs bg-[#edeaff] text-[#3B3397] px-2 py-1 rounded-full">Ongoing</span>
+          <span className="text-xs bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white px-2 py-1 rounded-full shadow">Ongoing</span>
         </li>
         <li className="py-2 flex items-center justify-between">
           <span>Vice President Student Council</span>
@@ -157,18 +159,87 @@ const Dashboard = () => (
 );
 
 const VotersGuideline = () => (
-  <div className="w-full">
-    <div className="text-2xl font-bold text-[#23235B] mb-4">VOTERS GUIDELINE</div>
-    <ol className="list-decimal list-inside space-y-3 text-gray-700 bg-white rounded-lg shadow p-6">
-      <li>Read all instructions carefully before voting.</li>
-      <li>Ensure you are eligible to vote in this election.</li>
-      <li>Review the list of candidates and their platforms.</li>
-      <li>Select your preferred candidate for each position.</li>
-      <li>Double-check your selections before submitting your vote.</li>
-      <li>Click the "Submit Vote" button to finalize your choices.</li>
-      <li>Wait for the confirmation message to ensure your vote is counted.</li>
-      <li>Contact support if you encounter any issues during the voting process.</li>
-    </ol>
+  <div className="w-full min-h-screen relative flex items-center justify-center overflow-hidden">
+    {/* Dynamic background with floating shapes */}
+    <div className="absolute inset-0 z-0">
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-gradient-to-br from-[#6C63FF]/30 to-[#edeaff]/0 rounded-full blur-3xl animate-pulse" />
+      <div className="absolute top-1/2 right-0 w-80 h-80 bg-gradient-to-tr from-[#3B3397]/20 to-[#edeaff]/0 rounded-full blur-2xl animate-pulse" />
+      <div className="absolute bottom-0 left-1/2 w-72 h-72 bg-gradient-to-tl from-[#6C63FF]/20 to-[#edeaff]/0 rounded-full blur-2xl animate-pulse" />
+    </div>
+    <div className="relative z-10 max-w-2xl w-full">
+      {/* Floating icon header */}
+      <div className="flex items-center gap-3 mb-8 justify-center">
+        <span className="relative flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#6C63FF] to-[#3B3397] rounded-full shadow-2xl border-4 border-white/40 animate-float">
+          <FaInfoCircle className="text-3xl text-white drop-shadow-lg" />
+          <span className="absolute -top-2 -right-2 w-5 h-5 bg-gradient-to-br from-[#edeaff] to-[#6C63FF] rounded-full border-2 border-white shadow animate-ping" />
+        </span>
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#3B3397] drop-shadow tracking-tight">VOTERS GUIDELINE</h1>
+      </div>
+      {/* Glassy animated card */}
+      <div className="bg-white/60 backdrop-blur-2xl rounded-3xl shadow-2xl p-10 border-2 border-transparent bg-clip-padding relative animate-fade-in group transition-all duration-500 hover:shadow-[0_8px_40px_0_rgba(99,99,241,0.18)]">
+        <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-[#6C63FF]/40 via-[#edeaff]/10 to-[#3B3397]/30 blur-lg opacity-70 -z-10 animate-gradient-move" />
+        <ol className="space-y-7">
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaBookOpen className="mt-1 text-[#6C63FF] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#3B3397]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Start by reading these instructions carefully to ensure a smooth voting experience.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaIdBadge className="mt-1 text-[#3B3397] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#6C63FF]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Check your eligibility—only qualified voters can participate in this election.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaUsers className="mt-1 text-[#6C63FF] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#3B3397]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Take time to review all candidates and their platforms before making your choice.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaCheckSquare className="mt-1 text-[#3B3397] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#6C63FF]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Choose your favorite candidate for every available position.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaClipboardCheck className="mt-1 text-[#6C63FF] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#3B3397]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Double-check your selections to make sure everything is correct.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaPaperPlane className="mt-1 text-[#3B3397] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#6C63FF]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">When you’re ready, click the <span className="font-bold text-[#3B3397]">"Submit Vote"</span> button to cast your ballot.</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaRegSmile className="mt-1 text-[#6C63FF] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#3B3397]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Wait for the confirmation message—this means your vote has been counted!</span>
+          </li>
+          <li className="flex items-start gap-4 group-hover:scale-105 transition-transform duration-300">
+            <FaLifeRing className="mt-1 text-[#3B3397] text-2xl drop-shadow-lg transition-transform duration-300 group-hover:scale-125 group-hover:text-[#6C63FF]" />
+            <span className="text-gray-800 text-lg font-semibold tracking-wide">Need help? Contact support if you run into any issues while voting.</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+    {/* Animations */}
+    <style jsx>{`
+      @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      .animate-gradient-move {
+        background-size: 200% 200%;
+        animation: gradient-move 8s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-12px); }
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+    `}</style>
   </div>
 );
 
@@ -312,9 +383,10 @@ const Voting = () => {
             </div>
           </div>
         ))}
-        <div className="flex justify-center mt-8">
+        {/* Remove the submit button below */}
+        {/* <div className="flex justify-center mt-8">
           <button type="submit" className="px-8 py-2 rounded-full bg-[#3B3397] text-white font-semibold shadow hover:bg-[#edeaff] hover:text-[#3B3397] transition">SUBMIT VOTE</button>
-        </div>
+        </div> */}
       </form>
     </div>
   );
