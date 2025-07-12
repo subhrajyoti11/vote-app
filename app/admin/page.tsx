@@ -6,6 +6,7 @@ import Link from "next/link";
 interface Candidate {
   name: string;
   img: string;
+  title?: string; // Optional, only for voter candidates
 }
 
 interface Position {
@@ -199,26 +200,113 @@ const Settings = () => (
 
 const Voting = () => {
   const [votes, setVotes] = useState<Votes>({});
+  const [showVoters, setShowVoters] = useState(true);
+  const [allPositions, setAllPositions] = useState<Position[]>(() => {
+    const stored = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('candidates') || '[]') : [];
+    const merged = positions.map(pos => ({
+      ...pos,
+      candidates: [
+        ...pos.candidates,
+        ...stored.filter((c: any) => c.title === pos.title)
+      ]
+    }));
+    return merged;
+  });
+  const [addForm, setAddForm] = useState<{ [title: string]: boolean }>({});
+  const [newCandidate, setNewCandidate] = useState<{ [title: string]: { name: string; img: string | null } }>({});
 
-  const handleVote = (position: string, candidate: string) => {
-    setVotes({ ...votes, [position]: candidate });
+  // Remove candidate handler (unchanged)
+  const handleRemove = (title: string, name: string) => {
+    setAllPositions(prev => prev.map(pos =>
+      pos.title === title
+        ? { ...pos, candidates: pos.candidates.filter(c => c.name !== name) }
+        : pos
+    ));
+    const stored = JSON.parse(localStorage.getItem('candidates') || '[]');
+    const updated = stored.filter((c: any) => !(c.title === title && c.name === name));
+    localStorage.setItem('candidates', JSON.stringify(updated));
+  };
+
+  // Toggle voter section (unchanged)
+  const handleToggle = () => setShowVoters(v => !v);
+
+  // Add candidate handlers
+  const handleAddClick = (title: string) => {
+    setAddForm(f => ({ ...f, [title]: true }));
+    setNewCandidate(nc => ({ ...nc, [title]: { name: '', img: null } }));
+  };
+  const handleAddChange = (title: string, field: 'name' | 'img', value: string) => {
+    setNewCandidate(nc => ({
+      ...nc,
+      [title]: {
+        ...nc[title],
+        [field]: value
+      }
+    }));
+  };
+  const handleAddImage = (title: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        handleAddChange(title, 'img', ev.target?.result as string);
+      };
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  };
+  const handleAddSubmit = (title: string, e: React.FormEvent) => {
+    e.preventDefault();
+    const cand = newCandidate[title];
+    if (!cand.name || !cand.img) return;
+    setAllPositions(prev => prev.map(pos =>
+      pos.title === title
+        ? { ...pos, candidates: [...pos.candidates, { name: cand.name, img: cand.img as string, title }] }
+        : pos
+    ));
+    // Save to localStorage for persistence
+    const prevStored = JSON.parse(localStorage.getItem('candidates') || '[]');
+    localStorage.setItem('candidates', JSON.stringify([...prevStored, { name: cand.name, img: cand.img as string, title }]));
+    setAddForm(f => ({ ...f, [title]: false }));
+    setNewCandidate(nc => ({ ...nc, [title]: { name: '', img: null } }));
   };
 
   return (
     <div className="w-full">
-      <h1 className="text-2xl font-bold text-[#23235B] mb-6">YOU MAY NOW CAST YOUR VOTES!</h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-[#23235B]">YOU MAY NOW CAST YOUR VOTES!</h1>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" checked={showVoters} onChange={handleToggle} className="accent-[#3B3397] w-5 h-5" />
+          <span className="text-[#3B3397] font-semibold">Show Voter Candidates</span>
+        </label>
+      </div>
       <form>
-        {positions.map((pos) => (
+        {allPositions.map((pos) => (
           <div key={pos.title} className="mb-8">
-            <h2 className="font-bold text-lg text-[#23235B] mb-4">{pos.title}</h2>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-bold text-lg text-[#23235B]">{pos.title}</h2>
+              {!addForm[pos.title] && (
+                <button type="button" onClick={() => handleAddClick(pos.title)} className="px-4 py-1 rounded-full bg-[#edeaff] text-[#3B3397] font-semibold shadow hover:bg-[#3B3397] hover:text-white transition text-sm">Add Candidate</button>
+              )}
+            </div>
+            {addForm[pos.title] && (
+              <form onSubmit={e => handleAddSubmit(pos.title, e)} className="mb-4 flex flex-col md:flex-row items-center gap-4 bg-[#f5f6fa] p-4 rounded-xl shadow">
+                <input type="text" placeholder="Full Name" className="px-4 py-2 border-2 border-[#edeaff] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#6C63FF] transition shadow-sm bg-white" value={newCandidate[pos.title]?.name || ''} onChange={e => handleAddChange(pos.title, 'name', e.target.value)} required />
+                <input type="file" accept="image/*" className="" onChange={e => handleAddImage(pos.title, e)} required />
+                {newCandidate[pos.title]?.img && <img src={newCandidate[pos.title].img!} alt="Preview" className="w-12 h-12 rounded-full object-cover" />}
+                <button type="submit" className="px-4 py-2 rounded-full bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white font-bold shadow hover:from-[#3B3397] hover:to-[#6C63FF] transition">Add</button>
+                <button type="button" onClick={() => setAddForm(f => ({ ...f, [pos.title]: false }))} className="px-3 py-2 rounded-full bg-red-100 text-red-600 font-semibold hover:bg-red-200 transition">Cancel</button>
+              </form>
+            )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {pos.candidates.map((cand) => (
-                <div key={cand.name} className={`flex flex-col items-center bg-white rounded-xl shadow p-6 ${votes[pos.title] === cand.name ? 'ring-2 ring-[#3B3397]' : ''}`}>
+              {pos.candidates
+                .filter(c => showVoters || !('title' in c))
+                .map((cand) => (
+                <div key={cand.name} className={`flex flex-col items-center bg-white rounded-xl shadow p-6 ${votes[pos.title] === cand.name ? 'ring-2 ring-[#3B3397]' : ''}`}> 
                   <img src={cand.img} alt={cand.name} className="w-20 h-20 rounded-full mb-3 object-cover" />
                   <span className="font-semibold mb-2">{cand.name}</span>
-                  <button type="button" onClick={() => handleVote(pos.title, cand.name)} className={`px-4 py-1 rounded-full font-semibold text-sm mt-2 ${votes[pos.title] === cand.name ? 'bg-[#3B3397] text-white' : 'bg-[#edeaff] text-[#3B3397]'} transition`}>
+                  <button type="button" onClick={() => setVotes({ ...votes, [pos.title]: cand.name })} className={`px-4 py-1 rounded-full font-semibold text-sm mt-2 ${votes[pos.title] === cand.name ? 'bg-[#3B3397] text-white' : 'bg-[#edeaff] text-[#3B3397]'} transition`}>
                     Vote
                   </button>
+                  <button type="button" onClick={() => handleRemove(pos.title, cand.name)} className="mt-2 px-3 py-1 rounded bg-red-100 text-red-600 text-xs font-semibold hover:bg-red-200 transition">Remove</button>
                 </div>
               ))}
             </div>

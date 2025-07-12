@@ -14,11 +14,6 @@ export default function Home() {
   <Header/>
   <Hero/>
   <Footer/>
-  <div className="mt-8">
-    <Link href="/admin">
-      <button className="px-6 py-2 rounded-full bg-[#3B3397] text-white font-semibold shadow hover:bg-[#edeaff] hover:text-[#3B3397] transition">Go to Admin Dashboard</button>
-    </Link>
-  </div>
   
     </main>
   );

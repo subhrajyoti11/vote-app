@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface Candidate {
   name: string;
   img: string;
+  title?: string;
 }
 
 interface Position {
@@ -11,7 +12,7 @@ interface Position {
   candidates: Candidate[];
 }
 
-const positions: Position[] = [
+const defaultPositions: Position[] = [
   {
     title: "President Student Council",
     candidates: [
@@ -43,6 +44,21 @@ type Votes = {
 
 const VotingPage: React.FC = () => {
   const [votes, setVotes] = useState<Votes>({});
+  const [positions, setPositions] = useState<Position[]>(defaultPositions);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = JSON.parse(localStorage.getItem('candidates') || '[]');
+      const merged = defaultPositions.map(pos => ({
+        ...pos,
+        candidates: [
+          ...pos.candidates,
+          ...stored.filter((c: Candidate) => c.title === pos.title)
+        ]
+      }));
+      setPositions(merged);
+    }
+  }, []);
 
   const handleVote = (position: string, candidate: string) => {
     setVotes({ ...votes, [position]: candidate });

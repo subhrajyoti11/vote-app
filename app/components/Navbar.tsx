@@ -14,6 +14,7 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Home</Link>
             <Link href="/admin" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Admin</Link>
+            <Link href="/voter" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Voter</Link>
           </div>
           {/* Right Side: Search, Log in, Register */}
           <div className="flex items-center space-x-4">

@@ -1,17 +1,11 @@
 import React from "react";
 
 const Footer: React.FC = () => (
-  <footer className="relative w-full bg-gradient-to-t from-[#6C63FF] to-[#5146d6] text-white pt-16 pb-8 mt-16 overflow-hidden">
-    {/* Wavy SVG Top Border */}
-    <div className="absolute top-0 left-0 w-full -translate-y-full pointer-events-none">
-      <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-24">
-        <path d="M0,60 C360,120 1080,0 1440,60 L1440,100 L0,100 Z" fill="#6C63FF" fillOpacity="0.8" />
-      </svg>
-    </div>
+  <footer className="w-full py-16 bg-gradient-to-b from-[#f5f6fa] to-[#edeaff] mt-16 overflow-hidden font-sans">
     <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between gap-12 z-10 relative">
       {/* Left: Logo and Copyright */}
       <div className="flex flex-col items-start md:w-1/4 mb-6 md:mb-0">
-        <span className="text-white font-extrabold text-3xl tracking-tight bg-white/20 px-4 py-2 rounded-full mb-4 shadow-lg">iVOTE</span>
+        <span className="text-[#3B3397] font-extrabold text-3xl tracking-tight bg-white px-4 py-2 rounded-full mb-4 shadow-lg">iVOTE</span>
         <span className="text-sm opacity-80 mb-4">© Copyright 2023</span>
         <div className="flex space-x-4 mt-2">
           {/* Social Icons */}
@@ -55,9 +49,6 @@ const Footer: React.FC = () => (
         </div>
       </div>
     </div>
-    {/* Decorative Circles */}
-    <div className="absolute bottom-0 right-0 w-40 h-40 bg-[#fff]/10 rounded-full blur-2xl z-0" />
-    <div className="absolute bottom-10 left-0 w-32 h-32 bg-[#fff]/10 rounded-full blur-2xl z-0" />
   </footer>
 );
 
