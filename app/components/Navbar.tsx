@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Home</Link>
             <Link href="/admin" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Admin</Link>
-            <Link href="/voter" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Voter</Link>
+            <Link href="/register" className="text-white font-semibold hover:underline underline-offset-8 decoration-2 decoration-white">Voter</Link>
           </div>
           {/* Right Side: Search, Log in, Register */}
           <div className="flex items-center space-x-4">
@@ -28,7 +28,10 @@ const Navbar = () => {
               <button className="px-6 py-2 rounded-full border border-white text-white font-semibold bg-transparent hover:bg-white hover:text-[#6C63FF] transition">Log in</button>
             </Link>
             <Link href="/register">
-              <button className="px-6 py-2 rounded-full bg-white text-[#6C63FF] font-semibold shadow hover:bg-[#edeaff] transition">Register</button>
+              <button className="px-6 py-2 rounded-full bg-white text-[#6C63FF] font-semibold shadow hover:bg-[#edeaff] transition">Register as Voter</button>
+            </Link>
+            <Link href="/candidate">
+              <button className="px-6 py-2 rounded-full bg-gradient-to-r from-[#3B3397] to-[#6C63FF] text-white font-semibold shadow hover:from-[#6C63FF] hover:to-[#3B3397] transition">Become a Candidate</button>
             </Link>
           </div>
         </div>

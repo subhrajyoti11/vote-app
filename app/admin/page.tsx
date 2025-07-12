@@ -80,7 +80,6 @@ const Sidebar = ({ active, setActive }: { active: string; setActive: (s: string)
       </div>
       <nav className="flex flex-col gap-2 text-[#23235B] font-semibold">
         <button onClick={() => setActive("dashboard")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "dashboard" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaTachometerAlt /> Dashboard</button>
-        <button onClick={() => setActive("guideline")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "guideline" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaBook /> Voters Guideline</button>
         <button onClick={() => setActive("settings")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "settings" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaCog /> Settings</button>
         <button onClick={() => setActive("voting")} className={`flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-200 ${active === "voting" ? "bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white shadow-lg scale-105" : "hover:bg-[#edeaff]/80"}`}><FaVoteYea /> Voting</button>
         <Link href="/" className="mt-auto flex items-center gap-3 text-[#3B3397] hover:underline px-4 py-2"><FaSignOutAlt /> Log out</Link>
@@ -373,7 +372,7 @@ const Voting = () => {
                 .map((cand) => (
                 <div key={cand.name} className={`flex flex-col items-center bg-white rounded-xl shadow p-6 ${votes[pos.title] === cand.name ? 'ring-2 ring-[#3B3397]' : ''}`}> 
                   <img src={cand.img} alt={cand.name} className="w-20 h-20 rounded-full mb-3 object-cover" />
-                  <span className="font-semibold mb-2">{cand.name}</span>
+                  <span className="font-bold text-[#23235B] mb-2">{cand.name}</span>
                   <button type="button" onClick={() => setVotes({ ...votes, [pos.title]: cand.name })} className={`px-4 py-1 rounded-full font-semibold text-sm mt-2 ${votes[pos.title] === cand.name ? 'bg-[#3B3397] text-white' : 'bg-[#edeaff] text-[#3B3397]'} transition`}>
                     Vote
                   </button>

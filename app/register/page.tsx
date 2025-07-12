@@ -51,6 +51,9 @@ const RegisterPage: React.FC = () => {
         <div className="mt-6 text-center text-sm text-gray-600">
           Already have an account? <Link href="/login" className="text-[#3B3397] font-semibold hover:underline">Login</Link>
         </div>
+        <div className="mt-2 text-center text-sm">
+          <Link href="/voters-guideline" className="text-[#3B3397] font-semibold hover:underline">Voter Guidelines</Link>
+        </div>
       </div>
     </div>
   );

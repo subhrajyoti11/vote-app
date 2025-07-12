@@ -27,8 +27,8 @@ const Hero: React.FC = () => (
         <Link href="/register">
           <button className="px-8 py-3 rounded-full bg-gradient-to-r from-[#6C63FF] to-[#3B3397] text-white font-bold shadow-lg hover:from-[#3B3397] hover:to-[#6C63FF] transition text-lg">Get Started</button>
         </Link>
-        <Link href="/voter">
-          <button className="px-8 py-3 rounded-full bg-white text-[#3B3397] font-bold shadow hover:bg-[#edeaff] border border-[#3B3397] transition text-lg">Stand for Election</button>
+        <Link href="/candidate">
+          <button className="px-8 py-3 rounded-full bg-gradient-to-r from-[#3B3397] to-[#6C63FF] text-white font-bold shadow-lg hover:from-[#6C63FF] hover:to-[#3B3397] transition text-lg">Become a Candidate</button>
         </Link>
       </div>
     </div>

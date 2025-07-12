@@ -1,47 +1,106 @@
+'use client';
+
 import React from "react";
-import Link from "next/link";
+
+const guidelines = [
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#6C63FF" fillOpacity="0.15"/><path d="M10 20v-2a4 4 0 018 0v2" stroke="#3B3397" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="16" cy="12" r="4" stroke="#3B3397" strokeWidth="2"/></svg>
+    ),
+    text: "Read all instructions carefully before voting."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="6" y="10" width="20" height="12" rx="4" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 14v4" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="12" r="2" fill="#3B3397"/></svg>
+    ),
+    text: "Ensure you are eligible to vote in this election."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="8" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 16v-4" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="20" r="2" fill="#3B3397"/></svg>
+    ),
+    text: "Review the list of candidates and their platforms."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="8" y="16" width="16" height="8" rx="4" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 12v8" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="10" r="2" fill="#3B3397"/></svg>
+    ),
+    text: "Select your preferred candidate for each position."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="8" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 16v-4" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="20" r="2" fill="#3B3397"/></svg>
+    ),
+    text: "Double-check your selections before submitting your vote."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="6" y="10" width="20" height="12" rx="4" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 14v4" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="12" r="2" fill="#3B3397"/></svg>
+    ),
+    text: <span>Click the <span className="font-bold text-[#3B3397]">"Submit Vote"</span> button to finalize your choices.</span>
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#6C63FF" fillOpacity="0.15"/><path d="M10 20v-2a4 4 0 018 0v2" stroke="#3B3397" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="16" cy="12" r="4" stroke="#3B3397" strokeWidth="2"/></svg>
+    ),
+    text: "Wait for the confirmation message to ensure your vote is counted."
+  },
+  {
+    icon: (
+      <svg width="32" height="32" fill="none" viewBox="0 0 32 32"><rect x="8" y="8" width="16" height="16" rx="8" fill="#6C63FF" fillOpacity="0.15"/><path d="M16 16v-4" stroke="#3B3397" strokeWidth="2" strokeLinecap="round"/><circle cx="16" cy="20" r="2" fill="#3B3397"/></svg>
+    ),
+    text: "Contact support if you encounter any issues during the voting process."
+  }
+];
 
 const VotersGuideline = () => (
-  <div className="min-h-screen flex bg-[#F5F6FA]">
-    {/* Sidebar */}
-    <aside className="w-64 bg-white shadow-lg flex flex-col py-8 px-4">
-      <div className="flex items-center mb-10">
-        <span className="text-[#3B3397] font-extrabold text-2xl tracking-tight bg-[#edeaff] px-3 py-1 rounded-full mr-2">iVOTE</span>
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#edeaff] via-[#f5f6fa] to-[#c7d2fe] animate-bg-move">
+    <div className="bg-white/80 backdrop-blur-lg p-12 rounded-3xl shadow-2xl border-2 border-[#6C63FF]/30 w-full max-w-2xl flex flex-col items-center relative overflow-hidden" style={{boxShadow: '0 8px 32px 0 rgba(99, 102, 241, 0.18)'}}>
+      {/* Animated Icon */}
+      <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-[#6C63FF] to-[#3B3397] shadow-xl mb-6 animate-float border-4 border-white/40">
+        <svg width="56" height="56" fill="none" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="28" cy="28" r="26" fill="#6C63FF" fillOpacity="0.12" />
+          <path d="M16 28l8 8 16-16" stroke="#3B3397" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
       </div>
-      <nav className="flex flex-col gap-4 text-[#23235B] font-semibold">
-        <Link href="/admin" className="hover:bg-[#edeaff] rounded-lg px-4 py-2">Dashboard</Link>
-        <Link href="/voting" className="hover:bg-[#edeaff] rounded-lg px-4 py-2">Vote</Link>
-        <Link href="/voters-guideline" className="bg-[#3B3397] text-white rounded-lg px-4 py-2">Voters Guideline</Link>
-        <Link href="/settings" className="hover:bg-[#edeaff] rounded-lg px-4 py-2">Settings</Link>
-        <Link href="/" className="mt-auto text-[#3B3397] hover:underline">Log out</Link>
-      </nav>
-    </aside>
-    {/* Main Content */}
-    <main className="flex-1 p-10 flex flex-col md:flex-row gap-8">
-      <div className="flex-1">
-        <h1 className="text-2xl font-bold text-[#23235B] mb-4">VOTERS GUIDELINE</h1>
-        <ol className="list-decimal list-inside space-y-3 text-gray-700">
-          <li>Read all instructions carefully before voting.</li>
-          <li>Ensure you are eligible to vote in this election.</li>
-          <li>Review the list of candidates and their platforms.</li>
-          <li>Select your preferred candidate for each position.</li>
-          <li>Double-check your selections before submitting your vote.</li>
-          <li>Click the "Submit Vote" button to finalize your choices.</li>
-          <li>Wait for the confirmation message to ensure your vote is counted.</li>
-          <li>Contact support if you encounter any issues during the voting process.</li>
-        </ol>
-      </div>
-      <div className="flex-1 flex items-center justify-center">
-        {/* Illustration Placeholder */}
-        <div className="w-72 h-72 bg-[#edeaff] rounded-xl flex items-center justify-center">
-          <svg width="120" height="120" fill="none" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="40" width="80" height="60" rx="10" fill="#6C63FF" fillOpacity="0.2" />
-            <rect x="40" y="60" width="40" height="20" rx="5" fill="#6C63FF" fillOpacity="0.5" />
-            <rect x="55" y="70" width="10" height="10" rx="2" fill="#3B3397" />
-          </svg>
-        </div>
-      </div>
-    </main>
+      <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#6C63FF] to-[#3B3397] mb-8 drop-shadow tracking-tight">VOTERS GUIDELINES</h1>
+      <ul className="space-y-6 w-full">
+        {guidelines.map((g, i) => (
+          <li key={i} className="flex items-start gap-4 bg-white/70 rounded-xl p-5 shadow hover:shadow-lg transition-all border border-[#edeaff]">
+            <span className="mt-1">{g.icon}</span>
+            <span className="text-lg text-[#23235B] font-medium leading-relaxed">{g.text}</span>
+          </li>
+        ))}
+      </ul>
+      {/* Decorative floating shapes */}
+      <div className="absolute -top-16 -left-16 w-44 h-44 bg-gradient-to-br from-[#6C63FF]/30 to-[#edeaff]/0 rounded-full blur-2xl animate-pulse z-0" />
+      <div className="absolute bottom-0 right-0 w-56 h-56 bg-gradient-to-tr from-[#3B3397]/20 to-[#edeaff]/0 rounded-full blur-2xl animate-pulse z-0" />
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-14px); }
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+        .animate-pulse {
+          animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes bg-move {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-bg-move {
+          background-size: 200% 200%;
+          animation: bg-move 12s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
   </div>
 );
 
