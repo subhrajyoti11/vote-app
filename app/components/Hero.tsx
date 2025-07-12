@@ -15,6 +15,9 @@ const Hero: React.FC = () => (
           <Link href="/register">
             <button className="px-4 py-2 rounded-full bg-white text-[#3B3397] font-semibold shadow hover:bg-[#edeaff] transition text-sm border border-[#3B3397]">Register as a Voter</button>
           </Link>
+          <Link href="/login">
+            <button className="ml-2 px-4 py-2 rounded-full bg-[#3B3397] text-white font-semibold shadow hover:bg-[#edeaff] hover:text-[#3B3397] transition text-sm border border-[#3B3397]">Login</button>
+          </Link>
         </div>
         {/* Step 2 */}
         <div className="flex-1 p-6">
